@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SupplyService" targetNamespace="http://supplier.autoinc.com/SupplyService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://supplier.autoinc.com/SupplyService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://supplier.autoinc.com/SupplyService/">
+      <xsd:element name="confirmTransportation">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="orderId" type="xsd:int"/>
+
+          	<xsd:element name="orderToken" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="confirmTransportationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="isTransportationAvailable" type="xsd:boolean"/>
+          	<xsd:element name="orderId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateTransportationStatus">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="orderId" type="xsd:int"/>
+      			<xsd:element name="transportationStatus" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateTransportationStatusResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="tranporationId" type="xsd:int"/>
+      			<xsd:element name="orderId" type="xsd:int"/>
+      			<xsd:element name="status" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="confirmTransportationFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="confirmTransportationFault" type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateTransportationStatusFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="updateTransportationStatusFault" type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SupplyExcption" type="tns:SupplyExceptionType">
+      </xsd:element>
+
+      <xsd:complexType name="SupplyExceptionType">
+      	<xsd:sequence>
+      		<xsd:element name="message" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="cancelTransportation">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="orderId" type="xsd:int"/>
+      			<xsd:element name="orderToken" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelTransportationResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="isCanceled" type="xsd:boolean"/>
+      			<xsd:element name="ordertoken" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelTransportationFault">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="cancelTransportationFault" type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="cancelTransportationRequest">
+    <wsdl:part name="parameters" element="tns:cancelTransportation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confirmTransportationFault">
+    <wsdl:part name="parameters" element="tns:SupplyExcption">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelTransportationResponse">
+    <wsdl:part name="parameters" element="tns:cancelTransportationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTransportationStatusFault">
+    <wsdl:part name="parameters" element="tns:SupplyExcption">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelTransportationFault">
+    <wsdl:part name="parameters" element="tns:SupplyExcption">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confirmTransportationResponse">
+    <wsdl:part name="parameters" element="tns:confirmTransportationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confirmTransportationRequest">
+    <wsdl:part name="parameters" element="tns:confirmTransportation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTransportationStatusRequest">
+    <wsdl:part name="parameters" element="tns:updateTransportationStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTransportationStatusResponse">
+    <wsdl:part name="parameters" element="tns:updateTransportationStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SupplyService">
+    <wsdl:operation name="confirmTransportation">
+      <wsdl:input message="tns:confirmTransportationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:confirmTransportationResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:confirmTransportationFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateTransportationStatus">
+      <wsdl:input message="tns:updateTransportationStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateTransportationStatusResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:updateTransportationStatusFault">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelTransportation">
+      <wsdl:input message="tns:cancelTransportationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:cancelTransportationResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:cancelTransportationFault">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SupplyServiceSOAP" type="tns:SupplyService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="confirmTransportation">
+      <soap:operation soapAction="http://supplier.autoinc.com/SupplyService/confirmTransportation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateTransportationStatus">
+      <soap:operation soapAction="http://supplier.autoinc.com/SupplyService/updateTransportationStatus"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelTransportation">
+      <soap:operation soapAction="http://supplier.autoinc.com/SupplyService/cancelTransportation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SupplyService">
+    <wsdl:port name="SupplyServiceSOAP" binding="tns:SupplyServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
